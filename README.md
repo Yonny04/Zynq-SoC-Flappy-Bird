@@ -1,3 +1,25 @@
+<h4 align="center">
+    <br>
+    <img src="img/System_Blk_Diagram.png" alt="Zynq-7000 System Architecture" width="800">
+</h4>
+
+<h4 align="center">
+    Flappy Bird Zynq-7000 SoC Development Project
+</h4>
+
+<p align="center">
+    <a href="#project-overview">Overview</a> •
+    <a href="#key-features">Key Features</a> •
+    <a href="#system-architecture">Architecture</a> •
+    <a href="#development-milestones">Milestones</a>
+    <br>
+    <a href="#tech-stack--tools">Tech Stack</a> •
+    <a href="#getting-started">Setup</a> •
+    <a href="#ai-assisted-documentation">AI Retrieval</a> •
+    <a href="#future-improvements">Future Work</a>
+</p>
+
+
 ## Zynq-7000 Flappy Bird SoC Implementation
 
 A high-performance, hardware-accelerated version of Flappy Bird implemented on the **Xilinx Zynq-7000 All Programmable SoC**. This project demonstrates a complete Hardware/Software (HW/SW) co-design, utilizing the ARM Cortex-A9 processor for game logic and custom FPGA logic for real-time video generation.
