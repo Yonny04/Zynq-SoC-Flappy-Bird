@@ -1,6 +1,6 @@
 <h4 align="center">
     <br>
-    <img src="img/System_Blk_Diagram.png" alt="Zynq-7000 System Architecture" width="800">
+    <img src= "img/System_Blk_Diagram.png" width="800">
 </h4>
 
 <h4 align="center">
@@ -15,7 +15,6 @@
     <br>
     <a href="#tech-stack--tools">Tech Stack</a> •
     <a href="#getting-started">Setup</a> •
-    <a href="#ai-assisted-documentation">AI Retrieval</a> •
     <a href="#future-improvements">Future Work</a>
 </p>
 
