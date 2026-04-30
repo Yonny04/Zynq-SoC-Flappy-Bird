@@ -1,63 +1,57 @@
 <h4 align="center">
-    <br>
-    <img src= "img/System_Blk_Diagram.png" width="800">
+    <br> <img src="img/system-blk-diagram.png" width="800" alt="System Block Diagram">
 </h4>
 
 <h4 align="center">
-    Flappy Bird Zynq-7000 SoC Development Project
+    Flappy Bird Zynq-7000 SoC Implementation
 </h4>
 
 <p align="center">
-    <a href="#project-overview">Overview</a> •
-    <a href="#key-features">Key Features</a> •
-    <a href="#system-architecture">Architecture</a> •
-    <a href="#development-milestones">Milestones</a>
+    <a href="#description">Description</a> •
+    <a href="#hw-sw-architecture">Architecture</a> •
+    <a href="#technical-specifications">Specifications</a> •
+    <a href="#project-structure">Structure</a>
     <br>
-    <a href="#tech-stack--tools">Tech Stack</a> •
     <a href="#getting-started">Setup</a> •
-    <a href="#future-improvements">Future Work</a>
+    <a href="#controls">Controls</a> •
+    <a href="#future-work">Future Work</a>
 </p>
 
+## Description
 
-## Zynq-7000 Flappy Bird SoC Implementation
+A high-performance hardware-accelerated implementation of Flappy Bird for the **Xilinx Zynq-7000 SoC**. This project demonstrates a complete HW/SW co-design: the ARM Cortex-A9 Processing System (PS) manages game state and physics, while the Programmable Logic (PL) handles real-time video generation and sprite rendering.
 
-A high-performance, hardware-accelerated version of Flappy Bird implemented on the **Xilinx Zynq-7000 All Programmable SoC**. This project demonstrates a complete Hardware/Software (HW/SW) co-design, utilizing the ARM Cortex-A9 processor for game logic and custom FPGA logic for real-time video generation.
+## HW-SW Architecture
 
----
+The system utilizes the AXI4-Lite protocol to bridge the PS and PL, ensuring low-latency communication between the game engine and the display controller.
 
-##  System Architecture
+### Logic Partitioning
+* **Processing System (PS):** Runs C code to calculate bird trajectories, gravity, and collision logic. It writes coordinates to the PL through memory-mapped registers.
+* **Programmable Logic (PL):** A custom RTL video engine that renders sprites and background layers at a constant 60 FPS without taxing the CPU.
 
-The project is split into two main domains to maximize the efficiency of the Zynq architecture:
+## Technical Specifications
 
-### 1. Processing System (PS) - "The Brain"
-* **Application:** C/C++ code running on the ARM Cortex-A9 core.
-* **Responsibilities:** * Calculating bird physics (gravity, lift).
-  * Collision detection logic.
-  * Score management and game state machine.
-  * Writing coordinate data to the PL via AXI-Lite bus.
+### Physics & Dynamics
+The bird's vertical position $y$ is updated in the PS using a simple Euler integration of gravity:
+$$y_{t+1} = y_t + v_t \Delta t$$
+$$v_{t+1} = v_t + g \Delta t$$
 
-### 2. Programmable Logic (PL) - "The Muscle"
-* **Video Engine:** Custom RTL (Verilog/VHDL) rendering the game at 60 FPS.
-* **VGA/HDMI Controller:** Generates timing signals and pixel data.
-* **Sprite Hardware:** Specialized logic for drawing the bird, pipes, and background layers with zero CPU overhead.
+### Video Pipeline
+The VGA controller generates pixel-perfect timing for 640x480 resolution:
+* **Pixel Clock:** 25.175 MHz
+* **Refresh Rate:** 60 Hz
+* **Interface:** AXI4-Lite for coordinate updates.
 
----
+## Project Structure
 
-##  Tech Stack & Tools
-* **Hardware:** Zynq-7000 SoC (Zybo, ZedBoard, or Pynq)
-* **Development:** Vivado Design Suite (Hardware design & Bitstream)
-* **Software:** Vitis Unified Software Platform (C/C++ firmware)
-* **Protocol:** AXI4-Lite for PS-to-PL communication
-
----
-
-##  Getting Started
-
-### Prerequisites
-* Xilinx Vivado & Vitis (2020.1 or newer recommended).
-* A compatible micro-USB cable for programming and UART debugging.
-
-### Installation & Deployment
-1. **Clone the Repo**
-   ```bash
-   git clone [https://github.com/Yonny04/Zynq-SoC-Flappy-Bird.git](https://github.com/Yonny04/Zynq-SoC-Flappy-Bird.git)
+```text
+Zynq-SoC-Flappy-Bird/
+├── src/
+│   ├── core_0.c             # Main C application (Game Logic)
+│   ├── GameManager/         # Game state & physics handlers
+│   ├── Entity/              # Object definitions (Bird, Pipes)
+│   └── Sprites/             # Sprite bitmaps and rendering logic
+├── img/
+│   └── system-blk-diagram.png
+├── font8x8.c                # Hardware font renderer
+└── lscript.ld               # Linker script for ARM PS
