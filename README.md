@@ -1,6 +1,8 @@
+
 <h4 align="center">
-    <br> <img src="img/system-blk-diagram.png" width="800" alt="System Block Diagram">
+<img src="src/imgéFlappy_Bird_icon.png" alt="System Block Diagram" width="400">
 </h4>
+
 
 <h4 align="center">
     Flappy Bird Zynq-7000 SoC Implementation
@@ -24,6 +26,15 @@ A high-performance hardware-accelerated implementation of Flappy Bird for the **
 ## HW-SW Architecture
 
 The system utilizes the AXI4-Lite protocol to bridge the PS and PL, ensuring low-latency communication between the game engine and the display controller.
+
+
+<h4 align="center">
+  <img src="src/img/system-blk-diagram.png" 
+       alt="System Block Diagram" 
+       width="500" 
+       style="border: 2px solid #555555; padding: 10px; border-radius: 8px;">
+</h4>
+
 
 ### Logic Partitioning
 * **Processing System (PS):** Runs C code to calculate bird trajectories, gravity, and collision logic. It writes coordinates to the PL through memory-mapped registers.
