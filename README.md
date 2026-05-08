@@ -73,10 +73,20 @@ The VGA controller is a custom RTL module designed to meet industry-standard tim
 Zynq-SoC-Flappy-Bird/
 ├── hardware/                # Vivado Project & Block Designs
 ├── src/
-│   ├── core_0.c             # Main Game Loop (Bare-metal)
-│   ├── GameManager/         # Collision logic & Score tracking
-│   ├── Entity/              # Object classes (Bird, Pipes, Background)
-│   ├── Sprites/             # Sprite bitmaps & Rendering drivers
-│   └── font8x8.c            # Hardware-accelerated font renderer
-├── img/                     # Documentation assets
-└── lscript.ld               # ARM Linker script
+│   ├── Entity/               # Game entity definitions and logic
+│   │   ├── Bird/             # Flappy Bird movement and state
+│   │   └── Pipe/             # Pipe generation and scrolling logic
+│   ├── GameManager/          # Core game loop and state machine
+│   │   ├── Game_Manager.c
+│   │   └── Game_Manager.h
+│   ├── Sprites/              # Raw pixel data (.data) for game assets
+│   │   ├── backdrop.data     # Background image
+│   │   ├── flappy_title.data # Main menu title
+│   │   └── ...               # Various UI and game sprites
+│   ├── img/                  # Assets used specifically for README documentation
+│   ├── core_0.c              # Main application entry point for ARM Core 0
+│   ├── font8x8.c/h           # Minimalist 8x8 font library for text rendering
+│   ├── image_assets.S        # Assembly source for high-performance sprite memory mapping
+│   ├── lscript.ld            # Linker script for Zynq-7000 memory mapping
+│   └── Xilinx.spec           # Xilinx-specific environment configuration
+└── README.md                 # Project documentation
